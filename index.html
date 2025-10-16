@@ -72,12 +72,12 @@
         const chatContainer = document.getElementById('chat-container');
         const sendButton = document.getElementById('send-button');
 
-        // Set your Cloudflare Worker URL here
+        // This is your correct Worker URL
         const workerUrl = 'https://cf_ai_chatbot.cf-ai-aaditya.workers.dev'; 
 
         // Generate a unique session ID for this conversation
         const sessionId = crypto.randomUUID();
-
+        
         // Function to add a message to the chat display
         const addMessage = (sender, text) => {
             const messageDiv = document.createElement('div');
@@ -104,54 +104,43 @@
 
             if (!messageText) return;
 
-            if (workerUrl === 'https://cf_ai_chatbot.cf-ai-aaditya.workers.dev') {
-                addMessage('ai', 'Error: Please set your Cloudflare Worker URL in the index.html file.');
-                return;
-            }
-
             // Display user's message
             addMessage('user', messageText);
             messageInput.value = '';
             sendButton.disabled = true;
 
-            // Add a "thinking..." indicator
             const thinkingIndicator = document.createElement('div');
             thinkingIndicator.classList.add('flex', 'justify-start', 'thinking');
-            thinkingIndicator.innerHTML = `
-                <div class="message bg-gray-200 text-gray-500 p-3 rounded-lg rounded-bl-none italic">
-                    Thinking...
-                </div>
-            `;
+            thinkingIndicator.innerHTML = `<div class="message bg-gray-200 text-gray-500 p-3 rounded-lg rounded-bl-none italic">Thinking...</div>`;
             chatContainer.appendChild(thinkingIndicator);
             chatContainer.scrollTop = chatContainer.scrollHeight;
-
+            
             try {
-                // Send message to the Cloudflare Worker
                 const response = await fetch(workerUrl, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         sessionId: sessionId,
                         message: messageText,
                     }),
                 });
+                
+                chatContainer.removeChild(thinkingIndicator);
 
                 if (!response.ok) {
-                    throw new Error(`Worker responded with status: ${response.status}`);
+                    const errorText = await response.text();
+                    throw new Error(`Worker responded with status: ${response.status}. Body: ${errorText}`);
                 }
 
                 const data = await response.json();
-                
-                // Remove "thinking..." indicator and display AI response
-                chatContainer.removeChild(thinkingIndicator);
                 addMessage('ai', data.response);
 
             } catch (error) {
                 console.error('Error communicating with worker:', error);
-                chatContainer.removeChild(thinkingIndicator);
-                addMessage('ai', 'Sorry, I encountered an error. Please try again.');
+                if(thinkingIndicator.parentNode) {
+                    chatContainer.removeChild(thinkingIndicator);
+                }
+                addMessage('ai', `Sorry, an error occurred: ${error.message}`);
             } finally {
                 sendButton.disabled = false;
                 messageInput.focus();
@@ -160,3 +149,4 @@
     </script>
 </body>
 </html>
+
