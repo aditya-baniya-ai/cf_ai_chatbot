@@ -1,17 +1,8 @@
-wrangler.toml
-
-name = "ai-chat-assistant-worker"
-main = "src/index.js" # Adjust if your worker file is in a different location
-compatibility_date = "2024-04-03"
-
-# Binding for Workers AI
-
-[ai]
-binding = "AI"
-
-# Binding for the KV Namespace (for chat memory)
+name = "cf_ai_chatbot"
+main = "src/index.js"
+compatibility_date = "2025-10-16"
 
 [[kv_namespaces]]
 binding = "CHAT_HISTORY"
-id = "YOUR_KV_NAMESPACE_ID_HERE" # You will get this ID after creating the namespace
-preview_id = "YOUR_KV_PREVIEW_ID_HERE" # You will get this ID after creating the namespace
+id = ""
+preview_id = ""
