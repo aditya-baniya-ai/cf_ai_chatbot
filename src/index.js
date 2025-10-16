@@ -1,3 +1,5 @@
+import { Ai } from '@cloudflare/ai';
+
 export default {
   async fetch(request, env) {
     // Handle CORS preflight requests to allow the frontend to connect.
@@ -84,8 +86,7 @@ async function readStream(stream) {
   return result;
 }
 
-// CORS Headers for allowing requests from any origin (for development).
-// For production, you might want to restrict this to your Pages domain.
+// CORS Headers for allowing requests from any origin.
 const corsHeaders = {
 'Access-Control-Allow-Origin': '*',
 'Access-Control-Allow-Methods': 'POST, OPTIONS',
