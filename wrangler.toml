@@ -2,10 +2,6 @@ name = "cf_ai_chatbot"
 main = "src/index.js"
 compatibility_date = "2025-10-16"
 
-# This new section fixes the build error
-[build]
-external = ["@cloudflare/ai"]
-
 # Binding for Workers AI
 [ai]
 binding = "AI"
