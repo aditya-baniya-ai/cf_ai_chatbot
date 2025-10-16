@@ -72,4 +72,42 @@ export default {
   },
 };
 
+// Helper to read a stream into a string.
+async function readStream(stream) {
+  const reader = stream.getReader();
+  let result = '';
+  while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      result += new TextDecoder().decode(value);
+  }
+  return result;
+}
 
+// CORS Headers for allowing requests from any origin (for development).
+// For production, you might want to restrict this to your Pages domain.
+const corsHeaders = {
+'Access-Control-Allow-Origin': '*',
+'Access-Control-Allow-Methods': 'POST, OPTIONS',
+'Access-Control-Allow-Headers': 'Content-Type',
+};
+
+function handleOptions(request) {
+if (
+  request.headers.get('Origin') !== null &&
+  request.headers.get('Access-Control-Request-Method') !== null &&
+  request.headers.get('Access-Control-Request-Headers') !== null
+) {
+  // Handle CORS preflight requests.
+  return new Response(null, {
+    headers: corsHeaders,
+  });
+} else {
+  // Handle standard OPTIONS request.
+  return new Response(null, {
+    headers: {
+      Allow: 'POST, OPTIONS',
+    },
+  });
+}
+}
