@@ -1,0 +1,16 @@
+{
+    "name": "ai-chat-assistant-project",
+    "version": "1.0.0",
+    "description": "An AI-powered chat application built on the Cloudflare stack.",
+    "main": "src/index.js",
+    "scripts": {
+      "start": "wrangler dev",
+      "deploy": "wrangler deploy"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "wrangler": "^3.0.0"
+    }
+  }
+  
