@@ -7,9 +7,6 @@ format = "modules" # This line fixes the build error
 [ai]
 binding = "AI"
 
-[build]
-external = ["@cloudflare/ai"]
-
 [[kv_namespaces]]
 binding = "CHAT_HISTORY"
 id = "2f813e2b0fea45ceabe5f812ea5f4b94"
