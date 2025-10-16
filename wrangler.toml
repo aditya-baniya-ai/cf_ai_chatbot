@@ -1,7 +1,9 @@
 name = "cf_ai_chatbot"
 main = "src/index.js"
 compatibility_date = "2025-10-16"
-format = "modules" # This line fixes the build error
+
+[build]
+command = "npm install"
 
 # Binding for Workers AI
 [ai]
