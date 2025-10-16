@@ -5,4 +5,3 @@ compatibility_date = "2025-10-16"
 [[kv_namespaces]]
 binding = "CHAT_HISTORY"
 id = "2f813e2b0fea45ceabe5f812ea5f4b94"
-preview_id = "def456uvw"
