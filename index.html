@@ -73,7 +73,7 @@
         const sendButton = document.getElementById('send-button');
 
         // Set your Cloudflare Worker URL here
-        const workerUrl = 'https://cf-ai-aaditya.workers.dev'; 
+        const workerUrl = 'https://cf_ai_chatbot.cf-ai-aaditya.workers.dev/'; 
 
         // Generate a unique session ID for this conversation
         const sessionId = crypto.randomUUID();
@@ -104,7 +104,7 @@
 
             if (!messageText) return;
 
-            if (workerUrl === 'https://cf-ai-aaditya.workers.dev') {
+            if (workerUrl === 'https://cf_ai_chatbot.cf-ai-aaditya.workers.dev/') {
                 addMessage('ai', 'Error: Please set your Cloudflare Worker URL in the index.html file.');
                 return;
             }
