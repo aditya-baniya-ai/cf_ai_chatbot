@@ -1,5 +1,9 @@
 # Cloudflare project Idea Assistant
 
+Check it out here
+https://1348118b.cf-ai-chatbot-an6.pages.dev/
+
+
 # cf_ai_chatbot: AI-Powered Project Idea Assistant
 
 This is an AI-powered chat application built entirely on the Cloudflare stack, as part of an assignment. It allows users to brainstorm project ideas with an AI assistant that remembers the context of the conversation.
